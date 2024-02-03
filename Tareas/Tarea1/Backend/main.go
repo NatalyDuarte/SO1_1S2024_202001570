@@ -21,5 +21,5 @@ func main() {
 	router := gin.Default()
 	router.GET("/data", getDatos)
 
-	router.Run("localhost:3001")
+	router.Run("localhost:3000")
 }
