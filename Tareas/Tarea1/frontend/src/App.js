@@ -10,30 +10,24 @@ var horaActual = fechaHoraActual.toLocaleTimeString();
 console.log("Fecha actual: " + fechaActual);
 console.log("Hora actual: " + horaActual);
 const fetchApi = async () => {
-  const elemento = document.getElementById('textdata');
-  let data = "<p> Carnet: 202001570 , Nombre: Nataly Saraí Guzmán Duarte"
-  data = data + " Fecha: " + fechaActual + " Hora: " + horaActual +"</p>"
-  if (elemento) {
-    elemento.innerHTML = data;
-  }
+  const url = "http://localhost:3000/data"
+  const [data, setData] = useState('');
   
-};
+  const fetchApi = async () => {
+  try {
+  const response = await fetch(url); 
+  const textData = await response.text();
+  console.log("Aqui"+response)
+  setData(textData);
+  } catch (error) {
+  console.log(error);
+  }
+  };
+  textData = textData + " Fecha: " + fechaActual + " Hora: " + horaActual +"</p>"
+  if (elemento) {
+    elemento.innerHTML = textData;
+  }
 
-
-/*
-const url = "http://localhost:3000/data"
-const [data, setData] = useState('');
-
-const fetchApi = async () => {
-try {
-const response = await fetch(url); 
-const textData = await response.text();
-console.log("Aqui"+response)
-setData(textData);
-} catch (error) {
-console.log(error);
-}
-};*/
 
 return (
 <div className="App">
