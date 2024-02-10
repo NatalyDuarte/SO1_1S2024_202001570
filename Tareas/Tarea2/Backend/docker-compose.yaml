@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  db:
+    image: mongo:5
+    restart: always
+    ports:
+      - 27018:27017
+    environment:
+      - MONGODB_DATABASE:DB
+    volumes:
+      - ./database:/data/db
+
+  api:
+    image: backtarea2
+    restart: always
+    ports:
+      - '3002:3002'
+    depends_on:
+      - db
+    
+
+  front:
+    image: fronentarea2
+    ports:
+      - '3000:3000'
+    restart: always
+    depends_on:
+      - db
+      - api
+
+    

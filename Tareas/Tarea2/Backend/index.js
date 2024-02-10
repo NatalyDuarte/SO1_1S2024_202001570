@@ -8,7 +8,7 @@ const path = require('path');
 const app = express();
 const port = 3002;
 
-const mongoURI = 'mongodb://localhost:27017/BaseTa'; // Reemplaza con tu URI de MongoDB
+const mongoURI = 'mongodb://db:27017/BaseTa'; 
 
 app.use(cors());
 app.use(bodyParser.json({ limit: '10mb' }));
@@ -39,7 +39,7 @@ app.post('/enviar', async (req, res) => {
     const result = await collection.insertOne({
       base64: imageData,
       fecha_toma: new Date(date),
-      filePath: filePath // Opcional: puedes almacenar la ruta del archivo si lo deseas
+      filePath: filePath 
     });
 
     console.log('Foto almacenada con éxito:', fileName);
@@ -51,7 +51,7 @@ app.post('/enviar', async (req, res) => {
     res.status(500).json({ success: false, error: 'Internal Server Error' });
   } finally {
     if (client) {
-      await client.close(); // Cierra la conexión a la base de datos al finalizar
+      await client.close(); 
     }
   }
 });
