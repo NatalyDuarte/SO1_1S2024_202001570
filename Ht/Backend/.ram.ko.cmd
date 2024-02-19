@@ -1,0 +1,1 @@
+cmd_/home/nataly/Documentos/Ht/Backend/ram.ko := ld -r  -m elf_x86_64 -z noexecstack   --build-id=sha1  -T scripts/module.lds -o /home/nataly/Documentos/Ht/Backend/ram.ko /home/nataly/Documentos/Ht/Backend/ram.o /home/nataly/Documentos/Ht/Backend/ram.mod.o;  true

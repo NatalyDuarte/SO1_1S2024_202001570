@@ -1,0 +1,1 @@
+cmd_/home/nataly/Documentos/Ht/Backend/Module.symvers := sed 's/\.ko$$/\.o/' /home/nataly/Documentos/Ht/Backend/modules.order | scripts/mod/modpost -m -a  -o /home/nataly/Documentos/Ht/Backend/Module.symvers -e -i Module.symvers   -T -
