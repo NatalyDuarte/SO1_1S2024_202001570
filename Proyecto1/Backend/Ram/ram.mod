@@ -1,0 +1,2 @@
+/home/nataly/Documentos/sopes/SO1_1S2024_202001570/Proyecto1/Backend/Ram/ram.o
+

@@ -1,0 +1,1 @@
+cmd_/home/nataly/Documentos/sopes/SO1_1S2024_202001570/Proyecto1/Backend/Ram/ram.mod := { echo  /home/nataly/Documentos/sopes/SO1_1S2024_202001570/Proyecto1/Backend/Ram/ram.o;  echo; } > /home/nataly/Documentos/sopes/SO1_1S2024_202001570/Proyecto1/Backend/Ram/ram.mod

@@ -1,0 +1,1 @@
+cmd_/home/nataly/Documentos/sopes/SO1_1S2024_202001570/Proyecto1/Backend/Ram/modules.order := {   echo /home/nataly/Documentos/sopes/SO1_1S2024_202001570/Proyecto1/Backend/Ram/ram.ko; :; } | awk '!x[$$0]++' - > /home/nataly/Documentos/sopes/SO1_1S2024_202001570/Proyecto1/Backend/Ram/modules.order
