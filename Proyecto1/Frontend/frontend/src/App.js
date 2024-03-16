@@ -1,33 +1,55 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
+import { Chart as ChartJS, ArcElement, registerables } from 'chart.js'; // Importa ChartJS y ArcElement
+ChartJS.register(...registerables); 
 
 
 const API_URL = 'http://localhost:8080/ram_info';
 
 function App() {
   const [freeRam, setFreeRam] = useState(null);
+  const [totalRam, setTotalRam] = useState(8000000);
+  const [useRam, setUseRam] = useState(0); 
+  const [porcentajeUsado, setPorcentajeUsado] = useState(0);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(API_URL);
-        if (response.ok) {
-          const data = await response.json();
-          setFreeRam(data.freeRam);
-        } else {
-          throw new Error('Error HTTP: ' + response.status);
-        }
-      } catch (error) {
-        console.error('Error fetching data:', error);
-        // Handle errors here (e.g., display an error message to the user)
-      }
-    };
-
-    fetchData();
+  const fetchData = async () => {
+  try {
+  const response = await fetch(API_URL);
+  if (response.ok) {
+  const data = await response.json();
+  updateFreeRam(data.freeRam); // Llamar a la función para actualizar el estado
+  } else {
+  throw new Error('Error HTTP: ' + response.status);
+  }
+  } catch (error) {
+  console.error('Error fetching data:', error);
+  }
+  };
+  const interval = setInterval(fetchData, 10000);
+  // Limpieza del intervalo cuando el componente se desmonta
+  return () => clearInterval(interval);
   }, []);
-
+  // Función para actualizar el estado
+  const updateFreeRam = (result) => {
+  setFreeRam(result);
+  setUseRam(totalRam - result);
+  const actualizado = ((totalRam - result) / totalRam) * 100;
+  setPorcentajeUsado(actualizado.toFixed(2)); 
+  };
+  const chartData = {
+    labels: ['Memoria libre', 'Memoria en uso'],
+    datasets: [
+      {
+        label: 'Memoria RAM',
+        data: [freeRam, useRam],
+        backgroundColor: ['#2ECC71', '#E74C3C'],
+        borderColor: ['#2ECC71', '#E74C3C'],
+        borderWidth: 1
+      }
+    ]
+  };
   return (
     <div className="App">
       <header class="masthead text-center text-white">
@@ -61,8 +83,9 @@ function App() {
               <div class=" order-lg-1">
                 <div class="p-2">
                 <h2>Monitoreo en tiempo real</h2>
-                <h1> RAM</h1><br></br>
-                console.log(freeRam);
+                <h3>Memoria RAM</h3>
+                <p>Memoria RAM libre: {freeRam} bytes</p>
+                <Pie data={chartData} />
                 </div>
               </div>
             </div>
