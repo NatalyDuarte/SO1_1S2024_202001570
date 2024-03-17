@@ -1,49 +1,72 @@
-import './App.css';
 import React, { useState, useEffect } from 'react';
 import { Pie } from 'react-chartjs-2';
-import { Chart as ChartJS, ArcElement, registerables } from 'chart.js'; // Importa ChartJS y ArcElement
-ChartJS.register(...registerables); 
+import { Chart as ChartJS, ArcElement, registerables } from 'chart.js';
 
+ChartJS.register(...registerables);
 
-const API_URL = 'http://localhost:8080/ram_info';
+const API_URL_RAM = 'http://localhost:8080/ram_info';
+const API_URL_CPU = 'http://localhost:8080/cpu_info';
 
 function App() {
-  const [freeRam, setFreeRam] = useState(null);
-  const [totalRam, setTotalRam] = useState(8000000);
-  const [useRam, setUseRam] = useState(0); 
-  const [porcentajeUsado, setPorcentajeUsado] = useState(0);
+  const [data, setData] = useState({
+    freeRam: null,
+    cpuInfo: null,
+  });
 
   useEffect(() => {
-  const fetchData = async () => {
-  try {
-  const response = await fetch(API_URL);
-  if (response.ok) {
-  const data = await response.json();
-  updateFreeRam(data.freeRam); // Llamar a la función para actualizar el estado
-  } else {
-  throw new Error('Error HTTP: ' + response.status);
-  }
-  } catch (error) {
-  console.error('Error fetching data:', error);
-  }
-  };
-  const interval = setInterval(fetchData, 10000);
-  // Limpieza del intervalo cuando el componente se desmonta
-  return () => clearInterval(interval);
+    const fetchData = async () => {
+      try {
+        const responseRam = await fetch(API_URL_RAM);
+        if (responseRam.ok) {
+          const dataRam = await responseRam.json();
+          const responseCpu = await fetch(API_URL_CPU);
+          if (responseCpu.ok) {
+            const dataCpu = await responseCpu.json();
+            setData({
+              freeRam: dataRam.freeRam,
+              cpuInfo: dataCpu,
+            });
+          } else {
+            throw new Error('Error HTTP CPU: ' + responseCpu.status);
+          }
+        } else {
+          throw new Error('Error HTTP RAM: ' + responseRam.status);
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };    
+    const interval = setInterval(fetchData, 10000);
+    return () => clearInterval(interval);
   }, []);
-  // Función para actualizar el estado
-  const updateFreeRam = (result) => {
-  setFreeRam(result);
-  setUseRam(totalRam - result);
-  const actualizado = ((totalRam - result) / totalRam) * 100;
-  setPorcentajeUsado(actualizado.toFixed(2)); 
-  };
+
+  const { freeRam, cpuInfo } = data;
+  const totalRam = 8000000;
+  const useRam = totalRam - freeRam;
+  const porcentajeUsado = ((totalRam - freeRam) / totalRam) * 100;
+  const cpuUso = cpuInfo?.cpuTotal - cpuInfo?.cpuPorcentaje;
+
+  const cpuLibre = cpuInfo ? 100 - (cpuInfo.cpu_porcentaje / cpuInfo.cpu_total * 100) : 0;
+  const cpuEnUso = cpuInfo ? (cpuInfo.cpu_porcentaje / cpuInfo.cpu_total * 100) : 0;
   const chartData = {
     labels: ['Memoria libre', 'Memoria en uso'],
     datasets: [
       {
         label: 'Memoria RAM',
         data: [freeRam, useRam],
+        backgroundColor: ['#2ECC71', '#E74C3C'],
+        borderColor: ['#2ECC71', '#E74C3C'],
+        borderWidth: 1
+      }
+    ]
+  };
+
+  const cpuChartData = {
+    labels: ['CPU libre', 'CPU en uso'],
+    datasets: [
+      {
+        label: 'CPU',
+        data: [cpuLibre, cpuEnUso],
         backgroundColor: ['#2ECC71', '#E74C3C'],
         borderColor: ['#2ECC71', '#E74C3C'],
         borderWidth: 1
@@ -80,12 +103,17 @@ function App() {
       <section id="tiemporeal">
           <div class="container px-5">
             <div class="row gx-5 align-items-center">
-              <div class=" order-lg-1">
+            <h1><center>Monitoreo en tiempo real</center></h1>
+              <div class="col-lg-6">
                 <div class="p-2">
-                <h2>Monitoreo en tiempo real</h2>
-                <h3>Memoria RAM</h3>
-                <p>Memoria RAM libre: {freeRam} bytes</p>
-                <Pie data={chartData} />
+                  <h3>Memoria RAM</h3>
+                  <Pie data={chartData} />
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="p-2">
+                  <h3>CPU</h3>
+                  <Pie data={cpuChartData} />
                 </div>
               </div>
             </div>
