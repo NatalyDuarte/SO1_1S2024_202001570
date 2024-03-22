@@ -17,6 +17,8 @@ Se utilizo mysql para realizar la base de datos, en esta se almaceno la informac
     * freecpu
     * boundcpu
     * time
+![image](https://github.com/NatalyDuarte/SO1_1S2024_202001570/assets/82484670/1e1e0e56-71e1-4c29-9c77-de06cb120f68)
+![image](https://github.com/NatalyDuarte/SO1_1S2024_202001570/assets/82484670/e826a894-f5c1-45cb-8177-41cb4bb7c5bf)
 
 
 ## Backend
@@ -28,14 +30,21 @@ Los endpoints que se crearon fueron los siguientes
 * /tiempo/cpu
 * /tiempohis/ram
 * /tiempohis/cpu
+rutinas:
+![image](https://github.com/NatalyDuarte/SO1_1S2024_202001570/assets/82484670/e1fdfb9c-5985-4bd0-9f76-d8e83255c342)
+conexion y almacenamiento de datos:
 
-*fotos backend
+![image](https://github.com/NatalyDuarte/SO1_1S2024_202001570/assets/82484670/ac28f56d-5f99-402b-beb0-326354719c60)
+
 
 
 ## Fronted
 Para el fronted se utilizo React junto a la libreria de chartjs para poder mostrar la informacion del CPU y de la memoria RAM. Para el uso y libre se utilizo un grafico circular y para los datos historicos se utilizo una grafica lineal. Para poder mostrar los datos en la grafica cada cierto tiempo se utilizo useEffect que se ejecuta cada 5 segundos.
 
-*foto
+![image](https://github.com/NatalyDuarte/SO1_1S2024_202001570/assets/82484670/59c3774c-300d-4140-a782-2ec3fafab40e)  
+
+![image](https://github.com/NatalyDuarte/SO1_1S2024_202001570/assets/82484670/d55dedd8-d0f2-49d4-99b7-d01c34d29ee4)
+
 
 ## Dockerfile backend
 
@@ -46,22 +55,23 @@ Este archivo se utiliza para crear la imagen del backend realizado en GO. Aqui s
 
 
 ## Docker-compose
-El archivo define tres servicios: una base de datos MySQL, una API backend y una interfaz de usuario frontend. La base de datos se ejecuta en un contenedor con su propio volumen persistente para los datos. La API se construye a partir del Dockerfile actual y se conecta a la base de datos. La interfaz de usuario se construye a partir de un directorio separado y se conecta a la API. Los tres contenedores se ejecutan en una red interna y se exponen los puertos relevantes al host. El archivo también define variables de entorno para la configuración de la base de datos, la API y la interfaz de usuario.
- *foto
+El archivo define tres servicios: una base de datos MySQL, una API backend y una interfaz de usuario frontend. La base de datos se ejecuta en un contenedor con su propio volumen persistente para los datos. La API se construye a partir del Dockerfile actual y se conecta a la base de datos. La interfaz de usuario se construye a partir de un directorio separado y se conecta a la API. Los tres contenedores se ejecutan en una red interna y se exponen los puertos relevantes al host. El archivo también define variables de entorno para la configuración de la base de datos, la API y la interfaz de usuario.  
+![image](https://github.com/NatalyDuarte/SO1_1S2024_202001570/assets/82484670/2447354e-e646-4423-935f-62fc2b4aaf55)
+
 
 
 ## App
-Se utilizan componentes para los diferentes tipodes de graficas, como lo es: GraficaCpu, GraficaRam, HistoricoCpu, HistoricoRam, Home, entre otros. Como podemos ver obtenemos la informacion que nos devuelve los endpoint, y con esta informacion ya podemos graficar utilizando tanto la grafica de pie para los tiempo real, line para el tiempo real.
+Se utilizan App.js para editar la visualizacion de grafica. Como podemos ver obtenemos la informacion que nos devuelve los endpoint, y con esta informacion ya podemos graficar utilizando tanto la grafica de pie para los tiempo real, line para el tiempo real.  
 
+ ![image](https://github.com/NatalyDuarte/SO1_1S2024_202001570/assets/82484670/de06ac6f-0b39-48eb-a9e0-e37222241149)
+ ![image](https://github.com/NatalyDuarte/SO1_1S2024_202001570/assets/82484670/831c1e79-8d70-4e15-9b66-bbe8cc197471)
 
-*foto
-  
 
 
 ## Nginx
 El comando docker run ejecuta una imagen de Docker en un contenedor. En este caso, se ejecuta una imagen de Nginx con la configuración del archivo nginx.conf. El comando expone el puerto 80 del contenedor al puerto 80 del host, monta los volúmenes /www/html y /etc/nginx/conf.d del host en el contenedor, y ejecuta el comando cat /etc/nginx/conf.d/default.conf para mostrar la configuración de Nginx.
+![image](https://github.com/NatalyDuarte/SO1_1S2024_202001570/assets/82484670/070ba3b2-6b5c-4a21-bf29-e60760eabc53)
 
-*foto
 
 ## Modulos
 Modulo Ram:
@@ -84,12 +94,14 @@ Se utilizaron los siguientes comandos para la realizacion de los modulos
 Se utilizaron los siguientes comandos para la parte de docker
 
 * docker build -t nombre . 
-* docker compose up -d
-* docker compose stop
+* sudo docker compose up -d
+* sudo docker compose stop
 * docker images
 
 Se utilizaron los siguientes comandos para la parte de docker hub
 
-* sudo docker push user/imagen
-* sudo docker pull user/imagen
+* sudo docker push natalyduarte/imagen
+* sudo docker pull natalyduarte/imagen
+docker hub:
+![image](https://github.com/NatalyDuarte/SO1_1S2024_202001570/assets/82484670/29103e3c-5d34-481f-a623-0be2936451d3)
 
