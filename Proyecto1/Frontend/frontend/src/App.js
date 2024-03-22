@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { Pie } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, registerables } from 'chart.js';
 
 ChartJS.register(...registerables);
 
-const API_URL_RAM = 'http://localhost:8080/ram_info';
-const API_URL_CPU = 'http://localhost:8080/cpu_info';
+const API_URL_RAM = 'http://192.168.0.17:8080/tiempor/ram';
+const API_URL_CPU = 'http://192.168.0.17:8080/tiempor/cpu';
 
 function App() {
   const [data, setData] = useState({
     freeRam: null,
     cpuInfo: null,
   });
+  const [chartDatahis, setChartDatahis] = useState({});  
+  const [chartDatahiscp, setChartDatahiscp] = useState({});  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,12 +39,86 @@ function App() {
         console.error('Error fetching data:', error);
       }
     };    
-    const interval = setInterval(fetchData, 10000);
+    const interval = setInterval(fetchData, 1000);
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() =>{
+    const fetchChartData = async () => {
+      try {
+        const response = await fetch('http://192.168.0.17:8080/tiempohis/ram');
+        const data = await response.json();
+  
+        const labels = data.histrams.map(item => item.fech);
+        const dataValues = data.histrams.map(item => item.histram);
+  
+        setChartDatahis({
+          labels,
+          datasets: [
+            {
+              label: 'RAM Usada',
+              data: dataValues,
+              borderColor: 'orange',
+              backgroundColor: 'transparent',
+              pointBorderColor: 'orange',
+              pointBackgroundColor: 'rgba(255,150,0,0.5)',
+              pointRadius: 5,
+              pointHoverRadius: 10,
+              pointHitRadius: 30,
+              pointBorderWidth: 2,
+              pointStyle: 'rectRounded',
+            },
+          ],
+        });
+      } catch (error) {
+        console.error('Error fetching chart data:', error);
+        // Handle errors appropriately, e.g., display an error message
+      }
+    };
+    const interval = setInterval(fetchChartData, 10000);
+    return () => clearInterval(interval);
+
+  }, []);
+//===============================================================
+  useEffect(() =>{
+    const fetchChartDatacp = async () => {
+      try {
+        const response = await fetch('http://192.168.0.17:8080/tiempohis/cpu');
+        const data = await response.json();
+  
+        const labels = data.histcpus.map(item => item.fech);
+        const dataValues = data.histcpus.map(item => item.histcpu);
+  
+        setChartDatahiscp({
+          labels,
+          datasets: [
+            {
+              label: 'CPU Usado',
+              data: dataValues,
+              borderColor: 'orange',
+              backgroundColor: 'transparent',
+              pointBorderColor: 'orange',
+              pointBackgroundColor: 'rgba(255,150,0,0.5)',
+              pointRadius: 5,
+              pointHoverRadius: 10,
+              pointHitRadius: 30,
+              pointBorderWidth: 2,
+              pointStyle: 'rectRounded',
+            },
+          ],
+        });
+      } catch (error) {
+        console.error('Error fetching chart datacp:', error);
+        // Handle errors appropriately, e.g., display an error message
+      }
+    };
+    const interval = setInterval(fetchChartDatacp, 10000);
+    return () => clearInterval(interval);
+
+  }, []);
+
   const { freeRam, cpuInfo } = data;
-  const totalRam = 8000000;
+  const totalRam = 16000000;
   const useRam = totalRam - freeRam;
   const porcentajeUsado = ((totalRam - freeRam) / totalRam) * 100;
   const cpuUso = cpuInfo?.cpuTotal - cpuInfo?.cpuPorcentaje;
@@ -73,6 +150,7 @@ function App() {
       }
     ]
   };
+  
   return (
     <div className="App">
       <header class="masthead text-center text-white">
@@ -122,9 +200,21 @@ function App() {
       <section id="historico">
           <div class="container px-5">
             <div class="row gx-5 align-items-center">
-              <div class=" order-lg-1">
+            <h1><center>Monitoreo Historico</center></h1>
+              <div class="col-lg-6">
                 <div class="p-2">
-                <h2>Monitoreo Historico</h2>
+                  <h3>Memoria RAM Historica</h3>
+                  {chartDatahis.labels && chartDatahis.datasets && (
+                      <Line data={chartDatahis} />
+                    )}
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="p-2">
+                  <h3>CPU Historico</h3>
+                  {chartDatahiscp.labels && chartDatahiscp.datasets && (
+                      <Line data={chartDatahiscp} />
+                    )}
                 </div>
               </div>
             </div>

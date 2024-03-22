@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  backend:
+    image: natalyduarte/dockerback:latest
+    volumes:
+      - type: bind
+        source: /proc
+        target: /proc
+    depends_on:
+      - mysql
+    ports:
+      - "8080:8080"
+  frontend:
+    image: natalyduarte/dockerreac:latest
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  mysql_data:
