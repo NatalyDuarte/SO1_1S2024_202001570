@@ -1,17 +1,20 @@
 # Tarea 3 
 ## Video
 Link de video  
-https://youtu.be/HvQSF4dPV1o 
+https://youtu.be/uz_H6Lv5myA
 ## Capturas
 ### creacion de instancias vm
-![image](https://github.com/NatalyDuarte/SO1_1S2024_202001570/assets/82484670/d684cd6e-abbe-4fa7-a124-972bc898cde6)
+![image](https://github.com/NatalyDuarte/SO1_1S2024_202001570/assets/82484670/907ef8a6-9aa0-4bdd-a05e-fdfdd752dc1c)
 
 ### creacion de instancia redis
-![image](https://github.com/NatalyDuarte/SO1_1S2024_202001570/assets/82484670/17ad30c5-047e-458b-b7a6-2275022d8003)
+![image](https://github.com/NatalyDuarte/SO1_1S2024_202001570/assets/82484670/bb954aa6-d6cb-43c7-aefc-54318ba290ee)
+
 
 ### Resultado publicador
-![image](https://github.com/NatalyDuarte/SO1_1S2024_202001570/assets/82484670/d4b80a68-ad44-4c01-8bb3-945a90b73539)  
+![image](https://github.com/NatalyDuarte/SO1_1S2024_202001570/assets/82484670/848b297c-9853-4e6d-b629-57fd84201c4d)
+
 
 ### resultado suscriptor 
-![image](https://github.com/NatalyDuarte/SO1_1S2024_202001570/assets/82484670/e2d3644a-e9ab-4797-9155-849d84dc9edd)
+![image](https://github.com/NatalyDuarte/SO1_1S2024_202001570/assets/82484670/21b35841-a8da-4abd-bade-a3e52edc5f04)
+
 
