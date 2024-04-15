@@ -1,0 +1,24 @@
+Ingenieria en Ciencias y Sistemas  
+Sistemas Operativos 1  
+Catedratico: Jesús Alberto Guzmán Polanco  
+Aux: Daniel Velásquez
+**Nombre:** Nataly Saraí Guzmán Duarte  
+**Carnet:** 202001570  
+
+# Tarea 5
+## Completely Fair Scheduler
+Grafana es una plataforma de visualización de datos de código abierto ampliamente utilizada para crear paneles de control e interfaces de usuario para explorar y analizar métricas, registros y eventos. Es una herramienta poderosa y versátil que puede ser utilizada por individuos y equipos de todos los tamaños, desde pequeñas empresas hasta grandes organizaciones.
+Grafana funciona como una ventana única para visualizar y comprender datos de diversas fuentes. Permite a los usuarios recopilar datos de diferentes sistemas, como bases de datos, servidores y aplicaciones, y luego presentarlos en paneles de control personalizados y fáciles de usar. Estos paneles pueden incluir gráficos, tablas, indicadores y otros elementos visuales que facilitan la comprensión de tendencias, patrones y anomalías en los datos.
+La creación de dashboards en Grafana es un proceso relativamente sencillo e intuitivo. La plataforma ofrece una interfaz de usuario basada en la web que permite a los usuarios arrastrar y soltar diferentes elementos para crear paneles personalizados.
+- Configuración de la fuente de datos: El primer paso es configurar la fuente de datos que alimentará el panel. Grafana admite una amplia gama de fuentes de datos, incluyendo bases de datos relacionales, NoSQL, sistemas de monitoreo, registros y APIs.
+- Selección de métricas: Una vez configurada la fuente de datos, es necesario seleccionar las métricas específicas que se desea visualizar en el panel. Grafana permite filtrar y explorar las métricas disponibles para elegir las más relevantes para el análisis.
+- Personalización del panel: Grafana ofrece una amplia gama de opciones para personalizar la apariencia y el comportamiento del panel. Se pueden ajustar los colores, los estilos de gráfico, los intervalos de tiempo y otros aspectos para crear una visualización que se adapte a las necesidades específicas.
+- Agregar visualizaciones: Grafana incluye una variedad de visualizaciones predefinidas, como gráficos de líneas, gráficos de barras, tablas y mapas de calor. Los usuarios también pueden crear sus propias visualizaciones personalizadas utilizando HTML, CSS y JavaScript.
+Respecto a la conexión de Grafana con Redis; Se debe crear una instancia de Redis Cloud: Acceda a la consola de Google Cloud Platform y naveguar a la sección Redis, luego se debe crear la instancia.Se debe configurar los detalles de la instancia, como la región, la zona, la cantidad de memoria y el nombre de la instancia.
+Para permitir que Grafana se conecte a la instancia de Redis de forma privada, es necesario habilitar VPC Peering. Crear una conexión de VPC peering entre la red VPC donde se ejecuta Grafana y la red VPC donde se encuentra la instancia de Redis.
+La dirección IP privada de la instancia de Redis se utiliza para conectarse desde Grafana. Se puede encontrar la dirección IP privada en la sección detalles de la instancia de Redis en la consola de Google Cloud Platform.
+Luego se debe implementar Grafana en Google Kubernetes Engine (GKE): Grafana se puede implementar en GKE utilizando un Helm Chart. Siguiendo se debe configurar el acceso a la red, asegurandose de que la instancia de Grafana tenga acceso a la red VPC donde se encuentra la instancia de Redis. Puede configurar esto utilizando políticas de red o grupos de seguridad en GKE.
+Se debe acceder a la interfaz de usuario de Grafana; abriendo un navegador web y navegue a la dirección IP o URL de la instancia de Grafana. Iniciar sesión con sus credenciales de administrador.
+Se debe agregar una fuente de datos de Redis: Ingresar la dirección IP privada de la instancia de Redis, el puerto (por defecto 6379) y las credenciales de autenticación si es necesario.
+Y luego se debe guardar la fuente de datos; finalmente se debe crear un panel de control, seleccionar la fuente de datos de Redis y las métricas que desea visualizar. 
+Concluyendo, Grafana es una herramienta poderosa y versátil que puede ser utilizada para crear paneles de control e interfaces de usuario para explorar y analizar datos de diversas fuentes. Su capacidad para conectarse a una amplia gama de fuentes de datos, incluyendo Redis, la convierte en una herramienta valiosa para monitorear y optimizar el rendimiento de aplicaciones y sistemas.Es una herramienta relativamente fácil de aprender y usar, incluso para usuarios sin experiencia previa en visualización de datos. La plataforma ofrece una amplia gama de recursos, incluyendo documentación, tutoriales y ejemplos, para ayudar a los usuarios a comenzar a crear paneles de control personalizados.
