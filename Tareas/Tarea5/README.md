@@ -6,7 +6,6 @@ Aux: Daniel Velásquez
 **Carnet:** 202001570  
 
 # Tarea 5
-## Completely Fair Scheduler
 Grafana es una plataforma de visualización de datos de código abierto ampliamente utilizada para crear paneles de control e interfaces de usuario para explorar y analizar métricas, registros y eventos. Es una herramienta poderosa y versátil que puede ser utilizada por individuos y equipos de todos los tamaños, desde pequeñas empresas hasta grandes organizaciones.
 Grafana funciona como una ventana única para visualizar y comprender datos de diversas fuentes. Permite a los usuarios recopilar datos de diferentes sistemas, como bases de datos, servidores y aplicaciones, y luego presentarlos en paneles de control personalizados y fáciles de usar. Estos paneles pueden incluir gráficos, tablas, indicadores y otros elementos visuales que facilitan la comprensión de tendencias, patrones y anomalías en los datos.
 La creación de dashboards en Grafana es un proceso relativamente sencillo e intuitivo. La plataforma ofrece una interfaz de usuario basada en la web que permite a los usuarios arrastrar y soltar diferentes elementos para crear paneles personalizados.
