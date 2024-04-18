@@ -6,40 +6,22 @@
         "rank": "#1 en la lista Billboard 200 de EE. UU."
     },
     {
-        "name": "Pink Floyd",
+        "name": "The Beatles",
+        "album": "Revolver",
+        "year": "1966",
+        "rank": "#1 en la lista Billboard 200 de EE. UU."
+    },
+    {
+        "name": "Pink FLoyd",
         "album": "The Dark Side of the Moon",
         "year": "1973",
         "rank": "#1 en la lista Billboard 200 de EE. UU."
     },
-    {
-        "name": "Led Zeppelin",
-        "album": "Physical Graffiti",
+    { 
+        "name": "Pink FLoyd",
+        "album": "Wish You Were Here",
         "year": "1975",
         "rank": "#1 en la lista Billboard 200 de EE. UU."
-    },
-    { 
-        "name": "Michael Jackson",
-        "album": "Thriller",
-        "year": "1982",
-        "rank": "#1 en la lista Billboard 200 de EE. UU. durante 37 semanas"
-    },
-    {
-        "name": "Madonna",
-        "album": "Like a Prayer",
-        "year": "1989",
-        "rank": "#1 en la lista Billboard 200 de EE. UU."
-    },
-    {
-        "name": "Beyoncé",
-        "album": "Lemonade",
-        "year": "2016",
-        "rank": "#1 en la lista Billboard 200 de EE. UU."
-    },
-    {
-        "name": "N.W.A",
-        "album": "Straight Outta Compton",
-        "year": "1988",
-        "rank": "#37 en la lista Billboard 200 de EE. UU."
     }
 ]
     

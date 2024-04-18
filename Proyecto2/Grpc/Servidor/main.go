@@ -3,12 +3,14 @@ package main
 import (
 	"context"
 	"database/sql"
+	"encoding/json"
 	"fmt"
 	"log"
-	pb "modulo/proto"
+	pb "modulo/proto" // Replace with your proto package name
 	"net"
 
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/segmentio/kafka-go"
 	"google.golang.org/grpc"
 )
 
@@ -29,6 +31,13 @@ type Data struct {
 	Year  string
 	Rank  string
 }
+
+// Kafka configurations
+var (
+	kafkaBrokers  = "localhost:9092"      // Replace with your Kafka broker address
+	kafkaTopic    = "your-topic-name"     // Replace with your topic name
+	consumerGroup = "your-consumer-group" // Replace with your consumer group ID
+)
 
 func mysqlConnect() {
 	dsn := "root:tarea@tcp(34.85.187.123:3306)/tarea4"
@@ -56,7 +65,7 @@ func (s *server) ReturnInfo(ctx context.Context, in *pb.RequestId) (*pb.ReplyInf
 		Rank:  in.GetRank(),
 	}
 	fmt.Println(data)
-	insertMySQL(data)
+	//insertMySQL(data)
 	return &pb.ReplyInfo{Info: "Hola cliente, recibí el comentario"}, nil
 }
 
@@ -68,15 +77,53 @@ func insertMySQL(proyecto Data) {
 	}
 }
 
+func handleKafkaMessages() {
+	// Kafka consumer configuration
+	config := kafka.ReaderConfig{
+		Brokers:  []string{kafkaBrokers},
+		GroupID:  consumerGroup,
+		Topic:    kafkaTopic,
+		MinBytes: 1024,
+		MaxBytes: 10e6,
+	}
+
+	// Create a Kafka reader
+	reader := kafka.NewReader(config)
+	fmt.Println("Listening to Kafka topic:", kafkaTopic)
+
+	for {
+		msg, err := reader.ReadMessage(context.Background())
+		if err != nil {
+			log.Println("Error reading Kafka message:", err)
+			continue
+		}
+
+		// Unmarshal the message value (assuming JSON format)
+		var data Data
+		err = json.Unmarshal(msg.Value, &data) // Modify if needed
+		if err != nil {
+			log.Println("Error unmarshalling Kafka message:", err)
+			continue
+		}
+
+		// Use the data object for your application logic
+		insertMySQL(data)
+	}
+}
+
 func main() {
+	// Connect to MySQL
+	mysqlConnect()
+
+	// Start Kafka consumer in a separate goroutine
+	go handleKafkaMessages()
+
 	listen, err := net.Listen("tcp", port)
 	if err != nil {
 		log.Fatalln(err)
 	}
 	s := grpc.NewServer()
 	pb.RegisterGetInfoServer(s, &server{})
-
-	mysqlConnect()
 
 	if err := s.Serve(listen); err != nil {
 		log.Fatalln(err)
