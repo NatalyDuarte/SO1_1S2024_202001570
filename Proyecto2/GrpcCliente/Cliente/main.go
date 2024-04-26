@@ -31,7 +31,7 @@ func insertData(c *fiber.Ctx) error {
 		Name:  data["name"],
 		Album: data["album"],
 		Year:  data["year"],
-		Rank:  data["ranks"],
+		Rank:  data["rank"],
 	}
 
 	go sendServer(proyecto)

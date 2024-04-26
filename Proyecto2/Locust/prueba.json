@@ -1,27 +1,27 @@
 [
     {
-        "name": "The Beatles",
-        "album": "Abbey Road",
+        "name": "TheBeatles",
+        "album": "AbbeyRoad",
         "year": "1969",
-        "rank": "#1 en la lista Billboard 200 de EE. UU."
+        "rank": "1"
     },
     {
-        "name": "The Beatles",
+        "name": "TheBeatles",
         "album": "Revolver",
         "year": "1966",
-        "rank": "#1 en la lista Billboard 200 de EE. UU."
+        "rank": "12"
     },
     {
-        "name": "Pink FLoyd",
-        "album": "The Dark Side of the Moon",
+        "name": "PinkFLoyd",
+        "album": "TheDarkSideoftheMoon",
         "year": "1973",
-        "rank": "#1 en la lista Billboard 200 de EE. UU."
+        "rank": "142"
     },
     { 
-        "name": "Pink FLoyd",
-        "album": "Wish You Were Here",
+        "name": "PinkFLoyd",
+        "album": "WishYouWereHere",
         "year": "1975",
-        "rank": "#1 en la lista Billboard 200 de EE. UU."
+        "rank": "8182"
     }
 ]
     

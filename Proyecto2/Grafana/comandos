@@ -1,0 +1,1 @@
+sudo docker run -p 4000:3000 --name=grafana -e "GF_INSTALL_PLUGINS=redis-explorer-app" grafana/grafana
